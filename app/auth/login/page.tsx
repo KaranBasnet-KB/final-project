@@ -63,10 +63,12 @@ const Login = () => {
                   </div>
                 </div>
                 <div>
+                  <Link href='\dashboard\baseline'>
                   <button type = "submit" className="border rounded my-8  w-full p-2 cursor-pointer bg-blue-800 mb-2">
                     Login
                     <span className="p-2">▶</span>
                   </button>
+                  </Link>
                 </div>
                 <div className=" flex justify-center  my-4 text-lg ">
                   Already have an account?

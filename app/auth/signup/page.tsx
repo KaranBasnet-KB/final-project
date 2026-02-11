@@ -6,10 +6,9 @@ import { useEffect } from "react";
 const signup = () => {
 
   const getFetchData = async() => {
-    const response = await fetch('/api/register', {method: "POST", body: {
-            email: 'dfsdaf',
-            paswwor: 'dfsdfs'
-    }})
+    const response = await fetch('/api/register', {method: "POST", body: JSON.stringify(values)})
+    const data = await response.json();
+    console.log(data)
   }
 
   useEffect(() => {
@@ -51,10 +50,10 @@ const signup = () => {
                 <div>
                   <button className="border rounded my-8  w-full p-2 bg-blue-800  cursor-pointer mb-1 mt-10">
                     sign in
-                    <span className="p-2">▶</span>
+                  
                   </button>
                 </div>
-                <div className=" flex justify-center my-4 text-lg  ">
+                <div className=" flex justify-center my-4 text-lg  ">  
                   New Here ?
                   <div className="ml-2 hover:text-blue-500 hover:text-xl ">
                     <Link href="/auth/login">

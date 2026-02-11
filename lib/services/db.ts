@@ -10,5 +10,6 @@ async function dbConnect() {
     throw new Error('Please define the MONGODB_URI environment variable');
   }
   await mongoose.connect(MONGODB_URI);
+  console.log("db connnected")
   return mongoose;
 }
