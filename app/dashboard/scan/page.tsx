@@ -1,5 +1,5 @@
 import Header from "@/ components/Header";
-import SharedCard from "@/ components/Shared Card";
+import SharedCard from "@/ components/sharedcard";
 const scan = () => {
   return (
     <>

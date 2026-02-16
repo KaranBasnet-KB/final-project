@@ -4,24 +4,43 @@ import { useForm } from "react-hook-form"
 import {zodResolver} from "@hookform/resolvers/zod"
 import { z} from 'zod'
 import Link from "next/link"
+import { useRouter } from 'next/navigation'
+
+
 
 
 type LoginPayload = z.infer<typeof Registration>
 
 const Login = () => {
+  const router = useRouter();
   
- 
-  const { register, handleSubmit, formState: {errors, isSubmitting}} = useForm(
-    {
-      resolver: zodResolver(Registration), defaultValues: {
-       email:"",
-       password:""
-      }
+ const {
+    register,
+    handleSubmit,
+    formState: { errors, isSubmitting },
+  } = useForm({
+    resolver: zodResolver(Registration),
+    defaultValues: {
+      email: "",
+      password: "",
+    },
+  });
+  const onsubmit =async(values: LoginPayload) =>{
+     try {
+      const response = await fetch("/api/login", {
+        method: "POST",
+        body: JSON.stringify(values),
+      });
+      const data = await response.json();
+      console.log(data.message);
+      
+      router.push("/dashboard/baseline")
+
+    } catch (error) {
+      console.log("login error", error);
     }
-  )
-  const onsubmit =(values: LoginPayload) =>{
-    console.log (values)
-  }
+   
+  };
 
   return (
     <>
@@ -63,12 +82,14 @@ const Login = () => {
                   </div>
                 </div>
                 <div>
-                  <Link href='\dashboard\baseline'>
-                  <button type = "submit" className="border rounded my-8  w-full p-2 cursor-pointer bg-blue-800 mb-2">
-                    Login
+                 
+                  <button type = "submit" disabled = {isSubmitting} className="border rounded my-8  w-full p-2 cursor-pointer bg-blue-800 mb-2">
+                    {isSubmitting ? "loading...":"login"}
+                    
+                    
                     <span className="p-2">▶</span>
                   </button>
-                  </Link>
+                 
                 </div>
                 <div className=" flex justify-center  my-4 text-lg ">
                   Already have an account?
